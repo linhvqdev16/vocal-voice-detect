@@ -46,10 +46,14 @@ class _HomePageScreen extends State<HomePageScreen>{
         height: height,
         child: Stack(
           children: [
-            const Align(
+
+            Align(
               alignment: Alignment.bottomCenter,
-              child: Image(image: AssetImage(ImagesCustom.imageLightGrow),),
+              child: SizedBox(
+                  width: width,
+                  child: const Image(image: AssetImage(ImagesCustom.imageLightGrow), fit: BoxFit.cover,)),
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
@@ -64,13 +68,12 @@ class _HomePageScreen extends State<HomePageScreen>{
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child:  Text("Giọng hát tốt nhất của bạn là gì ?",
+                                  Expanded(
+                                    child: Text("Giọng hát tốt nhất của bạn là gì ?",
                                         style:  TextStyle(
-                                            fontSize: FontSizes.s25,
-                                            fontWeight: FontWeight.w500,
-                                            color: ColorCustom.colorWhite
+                                          fontSize: FontSizes.s36,
+                                          fontWeight: FontWeight.w500,
+                                          color: ColorCustom.colorWhite,
                                         )),
                                   ),
                                   SizedBox(height: 15),
@@ -78,9 +81,9 @@ class _HomePageScreen extends State<HomePageScreen>{
                                     alignment: Alignment.centerLeft,
                                     child: Text("Hãy đưa ra giọng hát tốt nhất của bạn lúc bạn thể hiện",
                                         style: TextStyle(
-                                            fontSize: FontSizes.s12,
-                                            fontWeight: FontWeight.normal,
-                                            color: ColorCustom.colorWhite
+                                            fontSize: FontSizes.s14,
+                                            fontWeight: FontWeight.w400,
+                                            color: ColorCustom.colorTextHeader
                                         )),
                                   ),
                                 ],

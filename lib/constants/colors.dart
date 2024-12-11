@@ -35,4 +35,5 @@ class ColorCustom{
   static const Color hawkesBlue = Color(0xFFE0DDF5);
 
   static const Color blackColor = Color(0xFF313131);
+  static const Color colorTextHeader = Color(0xFFA8B3C4);
 }

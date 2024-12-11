@@ -73,23 +73,22 @@ class _VoiceIdentityScreen extends State<VoiceIdentityScreen>{
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                Align(
-                                  alignment: Alignment.centerLeft,
+                                Expanded(
                                   child:  Text("Xác định quãng giọng bằng giọng hát của bạn",
                                       style:  TextStyle(
-                                          fontSize: FontSizes.s25,
-                                          fontWeight: FontWeight.w500,
-                                          color: ColorCustom.colorWhite
+                                        fontSize: FontSizes.s36,
+                                        fontWeight: FontWeight.w500,
+                                        color: ColorCustom.colorWhite,
                                       )),
                                 ),
                                 SizedBox(height: 15),
                                 Align(
                                   alignment: Alignment.centerLeft,
-                                  child: Text("Tìm ra ậm vực của bạn chỉ trong một vài bước",
+                                  child: Text("Tìm ra quãng giọng của bạn chỉ trong một vài bước",
                                       style: TextStyle(
-                                          fontSize: FontSizes.s12,
-                                          fontWeight: FontWeight.normal,
-                                          color: ColorCustom.colorWhite
+                                          fontSize: FontSizes.s14,
+                                          fontWeight: FontWeight.w400,
+                                          color: ColorCustom.colorTextHeader
                                       )),
                                 ),
                               ],
@@ -104,22 +103,11 @@ class _VoiceIdentityScreen extends State<VoiceIdentityScreen>{
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Container(
-                          // decoration: const BoxDecoration(
-                          //   image: DecorationImage(
-                          //     image: AssetImage(ImagesCustom.imageBackgroundVoice),
-                          //     fit: BoxFit.fill
-                          //   )
-                          // ),
+                        SizedBox(
                           height: height * 0.68,
                           width: width,
                           child: Stack(
                             children: [
-                              // Container(
-                              //   height: height * 0.68,
-                              //   width: width,
-                              //   child: Image.asset(ImagesCustom.imageBackgroundVoice, fit: BoxFit.fill),
-                              // ),
                               Padding(
                                 padding: const EdgeInsets.only(
                                 top: 20, left: 10, bottom: 10),
@@ -128,54 +116,6 @@ class _VoiceIdentityScreen extends State<VoiceIdentityScreen>{
                         ],
                           ),
                         ),
-                        // const SizedBox(height: 15),
-                        // Row(
-                        //   crossAxisAlignment: CrossAxisAlignment.center,
-                        //   children: [
-                        //     Expanded(
-                        //       child: GestureDetector(
-                        //         onTap: () {
-                        //           Navigator.of(context).push(MaterialPageRoute(builder: (context) => const IdentityVoiceDetailScreen()));
-                        //         },
-                        //         child: Container(
-                        //           height: width * 0.15,
-                        //           padding: const EdgeInsets.symmetric(
-                        //               horizontal: 5, vertical: 5),
-                        //           decoration: BoxDecoration(
-                        //               border: Border.all(color: Colors.grey),
-                        //               borderRadius: const BorderRadius.all(
-                        //                   Radius.circular(
-                        //                       RadiusCustom.radiusCardItem)),
-                        //               // gradient: const LinearGradient(
-                        //               //   begin: Alignment.topLeft,
-                        //               //   end: Alignment.bottomCenter,
-                        //               //   colors: [
-                        //               //     Color(0xFF7624F9),
-                        //               //     Color(0xFF9A63F1),
-                        //               //   ],
-                        //               // ),
-                        //               image: const DecorationImage(
-                        //                   image: AssetImage(ImagesCustom.imageVoiceIdentityBackground),
-                        //                   fit: BoxFit.cover
-                        //               )
-                        //           ),
-                        //           child: Row(
-                        //             children: [
-                        //               Expanded(
-                        //                   flex: 3,
-                        //                   child: Row(
-                        //                     mainAxisAlignment: MainAxisAlignment.center,
-                        //                     children: const [
-                        //                       Text("Tìm quãng giọng bài hát", style: TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite),)
-                        //                     ],
-                        //                   )),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     )
-                        //   ],
-                        // )
                       ],
                     ),
                   ),
@@ -211,7 +151,7 @@ class _VoiceIdentityScreen extends State<VoiceIdentityScreen>{
                               )
                           ),
                           child: const  Center(
-                            child: Text("Tìm quãng giọng bài hát", style: TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite),),
+                            child: Text("Tìm quãng giọng bài hát", style: TextStyle(fontSize: 21, fontWeight: FontWeight.w500, color: ColorCustom.colorWhite)),
                           ),
                         ),
                       ),

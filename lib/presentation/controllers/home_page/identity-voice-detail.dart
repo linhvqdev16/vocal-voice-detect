@@ -54,6 +54,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
   void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize();
     setState(() {});
+
   }
 
   /// Each time to start a speech recognition session
@@ -94,8 +95,8 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
 
   List<String> listSpeedText = [
     'Hình bóng ai đó nhẹ nhàng vụt qua nơi đây  Quyến rũ ngây ngất loạn nhịp làm tim mê say',
-    'Đồ Rê Mi Pha Son',
-    'Đồ Rê Mi Pha Son',
+    'Đồ',
+    'Đố',
     'Đồ Rê Mi Pha Son'
   ];
 
@@ -152,7 +153,9 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
 
              Align(
               alignment: Alignment.bottomCenter,
-              child: !isClickButton || isCompletedThisStep ? null : const Image(image: AssetImage(ImagesCustom.imageLightGrow),),
+              child: !isClickButton || isCompletedThisStep ? null : SizedBox(
+                   width: width,
+                  child: const Image(image: AssetImage(ImagesCustom.imageLightGrow), fit: BoxFit.cover,)),
             ),
 
             Padding(padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -292,42 +295,9 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                                     )
                                 ),
                                 child: Center(
-                                  child: Text('${step == 3 ? "Hoàn thành" : "Tiếp tục"}', style: TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite),)
+                                  child: Text('${step == 3 ? "Hoàn thành" : "Tiếp tục"}', style: const TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite),)
                                 ),
                               ),
-
-
-                              // Container(
-                              //   height: width * 0.15,
-                              //   padding: const EdgeInsets.symmetric(
-                              //       horizontal: 5, vertical: 5),
-                              //   decoration: BoxDecoration(
-                              //       border: Border.all(color: Colors.grey),
-                              //       borderRadius: const BorderRadius.all(
-                              //           Radius.circular(
-                              //               RadiusCustom.radiusCardItem)),
-                              //       gradient: const LinearGradient(
-                              //         begin: Alignment.topLeft,
-                              //         end: Alignment.bottomCenter,
-                              //         colors: [
-                              //           Color(0xFF7624F9),
-                              //           Color(0xFF9A63F1),
-                              //         ],
-                              //       )
-                              //   ),
-                              //   child: Row(
-                              //     children: [
-                              //       Expanded(
-                              //           flex: 3,
-                              //           child: Row(
-                              //             mainAxisAlignment: MainAxisAlignment.center,
-                              //             children:  [
-                              //               Text('${step == 3 ? "Hoàn thành" : "Tiếp tục"}', style: TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite),)
-                              //             ],
-                              //           )),
-                              //     ],
-                              //   ),
-                              // ),
                             ),
                           )
                         ],
@@ -396,14 +366,6 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                           setState(() {
                             isClickButton = true;
                             _startListening();
-                            // _controller.reset();
-                            // _animation = IntTween(begin: 0, end: listSpeedTextCharacter.length).animate(_controller);
-                            // _controller.forward();
-                            // Future.delayed(Duration(seconds: _controller.duration?.inSeconds ?? 5), () {
-                            //   setState(() {
-                            //     isCompletedThisStep = true;
-                            //   });
-                            // });
                           });
                         },
                         child: Container(
@@ -591,7 +553,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                         children: const [
                           Expanded(
                             flex: 5,
-                            child: Text("Tạo âm thanh “humm” với giọng thấp nhất của bạn.", style: TextStyle(fontSize: FontSizes.s13,
+                            child: Text("Tạo âm thanh “Đồ” với giọng thấp nhất của bạn.", style: TextStyle(fontSize: FontSizes.s13,
                                 fontWeight: FontWeight.w300
                                 , color: ColorCustom.colorWhite),),
                           )
@@ -677,7 +639,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                         children: const [
                           Expanded(
                             flex: 5,
-                            child: Text("Thử “Yee-yeahhh” bằng giọng cao nhất.", style: TextStyle(fontSize: FontSizes.s13,
+                            child: Text("Thử “Đố” bằng giọng cao nhất.", style: TextStyle(fontSize: FontSizes.s13,
                                 fontWeight: FontWeight.w300
                                 , color: ColorCustom.colorWhite),),
                           )

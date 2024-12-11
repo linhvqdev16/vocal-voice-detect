@@ -58,9 +58,11 @@ class _SurveyMusicScreen extends State<SurveyMusicScreen>{
         height: height,
         child: Stack(
           children: [
-            const Align(
+            Align(
               alignment: Alignment.bottomCenter,
-              child: Image(image: AssetImage(ImagesCustom.imageLightGrow),),
+              child: SizedBox(
+                  width: width,
+                  child: const Image(image: AssetImage(ImagesCustom.imageLightGrow), fit: BoxFit.cover,)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -77,13 +79,12 @@ class _SurveyMusicScreen extends State<SurveyMusicScreen>{
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
+                                  Expanded(
                                     child:  Text("Bạn thường hay nghe thể loại nhạc gì ?",
                                         style:  TextStyle(
-                                            fontSize: FontSizes.s25,
-                                            fontWeight: FontWeight.w500,
-                                            color: ColorCustom.colorWhite
+                                          fontSize: FontSizes.s36,
+                                          fontWeight: FontWeight.w500,
+                                          color: ColorCustom.colorWhite,
                                         )),
                                   ),
                                   SizedBox(height: 15),
@@ -91,9 +92,9 @@ class _SurveyMusicScreen extends State<SurveyMusicScreen>{
                                     alignment: Alignment.centerLeft,
                                     child: Text("Chọn 3 thể loại yêu thích hoặc hay hát nhất",
                                         style: TextStyle(
-                                            fontSize: FontSizes.s12,
-                                            fontWeight: FontWeight.normal,
-                                            color: ColorCustom.colorWhite
+                                            fontSize: FontSizes.s14,
+                                            fontWeight: FontWeight.w400,
+                                            color: ColorCustom.colorTextHeader
                                         )),
                                   ),
                                 ],
@@ -102,6 +103,8 @@ class _SurveyMusicScreen extends State<SurveyMusicScreen>{
                         ],
                       )
                   ),
+
+                  const SizedBox(height: 20,),
 
                   Expanded(
                     flex: 5,

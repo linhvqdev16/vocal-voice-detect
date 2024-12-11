@@ -1,7 +1,10 @@
 
+import 'dart:math';
+
 import 'package:base_flutter_app/constants/font_sizes.dart';
 import 'package:base_flutter_app/constants/images.dart';
 import 'package:base_flutter_app/presentation/controllers/home_page/home.dart';
+import 'package:base_flutter_app/presentation/controllers/home_page/home_page.dart';
 import 'package:base_flutter_app/presentation/controllers/home_page/voice-identity.dart';
 import 'package:base_flutter_app/presentation/widgets/common/layout_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +33,7 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
     if(step == 0){
       listSpeedTextCharacter = listSpeedText[0].split(''); // Split the text into individual characters
     }
+    initData();
   }
 
 
@@ -63,6 +67,101 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
   ];
 
   List<String> listSpeedTextCharacter = [];
+
+
+  List<Person> persons =  [];
+  List<Music> musics =  [];
+  List<Voice> voices =  [];
+  int randomVoice = 0;
+
+  Random random = Random();
+
+  void initData(){
+
+    randomVoice = random.nextInt(6) + 1;
+
+    /// Tone 1
+    persons.add(Person("Frank Sinatra", ImagesCustom.imageArtist, "Nghệ sĩ", 1));
+    persons.add(Person("Quân A.P", ImagesCustom.imageArtist, "Nghệ sĩ", 1));
+    persons.add(Person("ERIK", ImagesCustom.imageArtist, "Nghệ sĩ", 1));
+    persons.add(Person("Hồ Quang Hiếu", ImagesCustom.imageArtist, "Nghệ sĩ", 1));
+    persons.add(Person("Alec Benjamin", ImagesCustom.imageArtist, "Nghệ sĩ", 1));
+
+    musics.add(Music(ImagesCustom.imageMusic, "Ai Là Người Thương Em", "Quân A.P", "Dễ", 1));
+    musics.add(Music(ImagesCustom.imageMusic, "Sau tất cả", "ERIK", "Dễ", 1));
+    musics.add(Music(ImagesCustom.imageMusic, "Chạm Đáy Nỗi Đau", "ERIK", "Dễ", 1));
+    musics.add(Music(ImagesCustom.imageMusic, "Perfect", "Ed Sheeran", "Trung bình", 1));
+    musics.add(Music(ImagesCustom.imageMusic, "Đập Vỡ Cây Đàn", "Duy Khánh", "Khó", 1));
+    /// Tone 2
+    persons.add(Person("Vũ", ImagesCustom.imageArtist, "Nghệ sĩ, Nhạc sĩ", 2));
+    persons.add(Person("HIEUTHUHAI", ImagesCustom.imageArtist, "Nghệ sĩ", 2));
+    persons.add(Person("Grey D", ImagesCustom.imageArtist, "Nghệ sĩ", 2));
+    persons.add(Person("Alexander Rybak", ImagesCustom.imageArtist, "Nghệ sĩ", 2));
+    persons.add(Person("James Arthur", ImagesCustom.imageArtist, "Nghệ sĩ", 2));
+
+    musics.add(Music(ImagesCustom.imageMusic, "Lạ Lùng", "Vũ", "Dễ", 2));
+    musics.add(Music(ImagesCustom.imageMusic, "Exis Sign", "HIEUTHUHAI", "Dễ", 2));
+    musics.add(Music(ImagesCustom.imageMusic, "Nothing Else Matters", "Metallica", "Trung bình", 2));
+    musics.add(Music(ImagesCustom.imageMusic, "Thành Phố Buồn", "Đan Nguyên", "Trung bình", 2));
+    musics.add(Music(ImagesCustom.imageMusic, "Through the Valley", "Shawn James", "Khó", 2));
+
+    /// Tone 3
+    persons.add(Person("Bruno Mars", ImagesCustom.imageArtist, "Nghệ sĩ", 3));
+    persons.add(Person("Sơn Tùng M-TP", ImagesCustom.imageArtist, "Nghệ sĩ", 3));
+    persons.add(Person("Đức Phúc", ImagesCustom.imageArtist, "Nghệ sĩ", 3));
+    persons.add(Person("Noo Phước Thịnh", ImagesCustom.imageArtist, "Nghệ sĩ", 3));
+    persons.add(Person("Hà Anh Tuấn", ImagesCustom.imageArtist, "Nghệ sĩ", 3));
+
+    musics.add(Music(ImagesCustom.imageMusic, "Hơn Cả Yêu", "Đức Phúc", "Dễ", 3));
+    musics.add(Music(ImagesCustom.imageMusic, "Tháng Tư Là Lời Nói Dối Của Em", "Hà Anh Tuấn", "Dễ", 3));
+    musics.add(Music(ImagesCustom.imageMusic, "Cause I Love You", "Noo Phước Thịnh", "Trung bình", 3));
+    musics.add(Music(ImagesCustom.imageMusic, "When I Was Your Man", "Bruno Mars", "Trung bình", 3));
+    musics.add(Music(ImagesCustom.imageMusic, "All of Me", "John Legend", "Khó", 3));
+    /// Tone 4
+    persons.add(Person("Adele", ImagesCustom.imageArtist, "Nghệ sĩ", 4));
+    persons.add(Person("Ariana Grande", ImagesCustom.imageArtist, "Nghệ sĩ", 4));
+    persons.add(Person("Mỹ Linh", ImagesCustom.imageArtist, "Nghệ sĩ", 4));
+    persons.add(Person("Bảo Anh", ImagesCustom.imageArtist, "Nghệ sĩ", 4));
+    persons.add(Person("Tóc Tiên", ImagesCustom.imageArtist, "Nghệ sĩ", 4));
+
+    musics.add(Music(ImagesCustom.imageMusic, "Someone Like You", "Adele", "Dễ", 4));
+    musics.add(Music(ImagesCustom.imageMusic, "If I Ain't Got You", "Alicia Keys", "Dễ", 4));
+    musics.add(Music(ImagesCustom.imageMusic, "Piece of My Heart", "Janis Joplin", "Trung bình", 4));
+    musics.add(Music(ImagesCustom.imageMusic, "Tình Lỡ", "Lệ Quyên", "Trung bình", 4));
+    musics.add(Music(ImagesCustom.imageMusic, "My Heart Will Go On", "Celine Dion", "Khó", 4));
+    /// Tone 5
+    persons.add(Person("Leona Lewis", ImagesCustom.imageArtist, "Nghệ sĩ", 5));
+    persons.add(Person("Hồ Ngọc Hà", ImagesCustom.imageArtist, "Nghệ sĩ", 5));
+    persons.add(Person("Hoàng Thùy Linh", ImagesCustom.imageArtist, "Nghệ sĩ", 5));
+    persons.add(Person("Mỹ Tâm", ImagesCustom.imageArtist, "Nghệ sĩ", 5));
+    persons.add(Person("MIN", ImagesCustom.imageArtist, "Nghệ sĩ", 5));
+
+    musics.add(Music(ImagesCustom.imageMusic, "Em Gái Mưa", "Hương Tràm", "Dễ", 5));
+    musics.add(Music(ImagesCustom.imageMusic, "Because of You", "Kelly Clarkson", "Dễ", 5));
+    musics.add(Music(ImagesCustom.imageMusic, "Bleeding Love", "Leona Lewis", "Trung bình", 5));
+    musics.add(Music(ImagesCustom.imageMusic, "Yêu Một Người Vô Tâm", "Bảo Anh", "Trung bình", 5));
+    musics.add(Music(ImagesCustom.imageMusic, "I Will Always Love You", "Whitney Houston", "Khó", 5));
+    /// Tone 6
+    persons.add(Person("Lương Bích Hữu", ImagesCustom.imageArtist, "Nghệ sĩ", 6));
+    persons.add(Person("Ái Phương", ImagesCustom.imageArtist, "Nghệ sĩ", 6));
+    persons.add(Person("Vũ Cát Tường", ImagesCustom.imageArtist, "Nghệ sĩ", 6));
+    persons.add(Person("Hương Giang", ImagesCustom.imageArtist, "Nghệ sĩ", 6));
+    persons.add(Person("Beyoncé", ImagesCustom.imageArtist, "Nghệ sĩ", 6));
+
+    musics.add(Music(ImagesCustom.imageMusic, "Halo", "Beyoncé", "Dễ", 6));
+    musics.add(Music(ImagesCustom.imageMusic, "Có Em Chờ", "MIN", "Dễ", 6));
+    musics.add(Music(ImagesCustom.imageMusic, "Bùa Yêu", "Bích Phương", "Trung bình", 6));
+    musics.add(Music(ImagesCustom.imageMusic, "Bèo Dạt Mây Trôi", "Thùy Chi", "Trung bình", 6));
+    musics.add(Music(ImagesCustom.imageMusic, "Không Thể Cùng Nhau Suốt Kiếp", "Hòa Minzy", "Khó", 6));
+
+    /// Add voice
+    voices.add(Voice("Baritone", "Âm vực của bạn là A3-D6", 1));
+    voices.add(Voice("Bass", "Âm vực của bạn là A3-D6", 2));
+    voices.add(Voice("Tenor", "Âm vực của bạn là A3-D6", 3));
+    voices.add(Voice("Alto", "Âm vực của bạn là A3-D6", 4));
+    voices.add(Voice("Mezzo", "Âm vực của bạn là A3-D6", 5));
+    voices.add(Voice("Soprano", "Âm vực của bạn là A3-D6", 6));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +198,6 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
         centerTitle: true,
       ),
       body: Container(
-        padding: const EdgeInsets.only(bottom: 15),
         decoration: const BoxDecoration(
             gradient:  LinearGradient(
               begin: Alignment.topLeft,
@@ -153,19 +251,19 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                                              crossAxisAlignment: CrossAxisAlignment.center,
                                              children: [
                                                Row(
-                                                 children: const [
+                                                 children:  [
                                                    Expanded(
                                                        child: Padding(
                                                            padding: EdgeInsets.only(top: 15),
-                                                           child: Text("Âm vực của bạn là A3-D06 ", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s14, fontWeight: FontWeight.w300), textAlign: TextAlign.center,)))
+                                                           child: Text( "${voices.firstWhere((item) => item.id == randomVoice).description ?? ""}", style: TextStyle(color: ColorCustom.colorTextHeader, fontSize: FontSizes.s14, fontWeight: FontWeight.w400), textAlign: TextAlign.center,)))
                                                  ],
                                                ),
                                                Row(
-                                                 children: const [
+                                                 children:  [
                                                    Expanded(
                                                        child: Padding(
                                                            padding: EdgeInsets.only(top: 15),
-                                                           child: Text("Baritone", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s26, fontWeight: FontWeight.w500), textAlign: TextAlign.center)))
+                                                           child: Text("${voices.firstWhere((item) => item.id == randomVoice).name ?? ""}", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s36, fontWeight: FontWeight.w500), textAlign: TextAlign.center)))
                                                  ],
                                                )
                                              ],
@@ -183,16 +281,6 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                                  child: Stack(
                                    alignment: Alignment.center,
                                    children: [
-                                     // Container(
-                                     //   decoration:  BoxDecoration(
-                                     //       shape: BoxShape.circle,
-                                     //       border: Border.all(color: Color(0xFF7827F9).withOpacity(0.4), width: 0.5)
-                                     //   ),
-                                     //   width: 120,
-                                     //   height: 120,
-                                     // ),
-
-
                                      Container(
                                        decoration: const BoxDecoration(
                                          shape: BoxShape.circle,
@@ -202,7 +290,6 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                                        height: 110,
                                      ),
                                    ],
-
                                  ),
                                ),
                              ],
@@ -211,18 +298,18 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                          const SizedBox(height: 15),
 
                          Row(
-                           children: [
-                             Expanded(child: Text("Nghệ sĩ tương tự", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s18, fontWeight: FontWeight.w500),))
+                           children: const [
+                             Expanded(child: Text("Nghệ sĩ tương tự", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s16, fontWeight: FontWeight.w600),))
                            ],
                          ),
-                         SizedBox(height: 5),
+                         const SizedBox(height: 5),
                          Row(
                            children: const [
                              Expanded(
                                flex: 5,
-                               child: Text("Các nghệ sĩ có âm vực giọng hát tương tự giống bạn.", style: TextStyle(fontSize: FontSizes.s13,
-                                   fontWeight: FontWeight.w300
-                                   , color: ColorCustom.colorWhite,height: 2),),
+                               child: Text("Các nghệ sĩ có âm vực giọng hát tương tự giống bạn.", style: TextStyle(fontSize: FontSizes.s14,
+                                   fontWeight: FontWeight.w400
+                                   , color: ColorCustom.colorTextHeader, height: 1.5),),
                              )
                            ],
                          ),
@@ -230,10 +317,9 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                          ListView.builder(
                            shrinkWrap: true,
                            physics:  NeverScrollableScrollPhysics(),
-                           itemCount: 5,  // Number of items in the list
+                           itemCount: persons.where((item) => item.id == randomVoice).length,  // Number of items in the list
                            itemBuilder: (context, index) {
                              return Container(
-                               margin: EdgeInsets.symmetric(vertical: 10),
                                padding: EdgeInsets.symmetric(vertical: 10),
                                decoration: BoxDecoration(
                                    border: index == 4 ? null :  Border(
@@ -241,49 +327,34 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                                    )
                                ),
                                child: Row(
+                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                  children: [
                                    Expanded(
                                      flex: 1,
-                                     child: Container(
-                                       decoration: const BoxDecoration(
-                                         shape: BoxShape.circle,
-                                       ),
-                                       width: 50,
-                                       height:50,
-                                       child: Container(
-                                         width: 50,
-                                         height: 50,
-                                         decoration: BoxDecoration(
-                                           shape: BoxShape.circle,
-                                           color: ColorCustom.doveGrayColor.withOpacity(0.4),
-                                           border: Border.all(
-                                             color: Colors.grey.withOpacity(0.1),
-                                             width: 0,
-                                           ),
-                                         ),
-                                         child: Center(
-                                           child:
-                                           Image.asset(IconCustom.iconMale),
-                                         ),
+                                     child: SizedBox(
+                                       width: 40,
+                                       child: Image(
+                                         image: AssetImage(persons.where((item) => item.id == randomVoice).toList()[index].imageUrl ?? ""),
                                        ),
                                      ),
                                    ),
+                                   const SizedBox(width: 5),
                                    Expanded(
                                        flex: 2,
                                        child: Column(children: [
                                          Row(
                                            children: [
-                                             Expanded(child: Text("Sơn Tùng", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s18, fontWeight: FontWeight.w500),))
+                                             Expanded(child: Text("${persons.where((item) => item.id == randomVoice).toList()[index].name}", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s16, fontWeight: FontWeight.w600),))
                                            ],
                                          ),
                                          SizedBox(height: 5),
                                          Row(
-                                           children: const [
+                                           children:  [
                                              Expanded(
                                                flex: 5,
-                                               child: Text("Nghệ sĩ.", style: TextStyle(fontSize: FontSizes.s13,
-                                                   fontWeight: FontWeight.w300
-                                                   , color: ColorCustom.colorWhite),),
+                                               child: Text("${persons.where((item) => item.id == randomVoice).toList()[index].title}", style: TextStyle(fontSize: FontSizes.s14,
+                                                   fontWeight: FontWeight.w400
+                                                   , color: ColorCustom.colorTextHeader),),
                                              )
                                            ],
                                          ),
@@ -320,18 +391,18 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                          const SizedBox(height: 15),
 
                          Row(
-                           children: [
-                             Expanded(child: Text("Bạn có thể hát thử", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s18, fontWeight: FontWeight.w500),))
+                           children: const [
+                             Expanded(child: Text("Bạn có thể hát thử", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s16, fontWeight: FontWeight.w600),))
                            ],
                          ),
-                         SizedBox(height: 5),
+                         const SizedBox(height: 5),
                          Row(
                            children: const [
                              Expanded(
                                flex: 5,
-                               child: Text("Các bài hát được để xuất phù hợp với quãng giọng và sở thích âm nhạc của bạn.", style: TextStyle(fontSize: FontSizes.s13,
-                                   fontWeight: FontWeight.w300
-                                   , color: ColorCustom.colorWhite, height: 1.5),),
+                               child: Text("Các bài hát được để xuất phù hợp với quãng giọng và sở thích âm nhạc của bạn.", style: TextStyle(fontSize: FontSizes.s14,
+                                   fontWeight: FontWeight.w400
+                                   , color: ColorCustom.colorTextHeader, height: 1.5),),
                              )
                            ],
                          ),
@@ -339,52 +410,31 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                          const SizedBox(height: 15),
                          ListView.builder(
                            shrinkWrap: true,
-                           physics:  NeverScrollableScrollPhysics(),
-                           itemCount: 5,  // Number of items in the list
+                           physics:  const NeverScrollableScrollPhysics(),
+                           itemCount: musics.where((item) => item.id == randomVoice).toList().length,  // Number of items in the list
                            itemBuilder: (context, index) {
                              return Container(
-                               margin: EdgeInsets.symmetric(vertical: 10),
-                               padding: EdgeInsets.symmetric(vertical: 10),
+                               padding: const EdgeInsets.symmetric(vertical: 10),
                                decoration: BoxDecoration(
-                                   border: index == 4 ? null :  Border(
-                                     bottom: BorderSide(width: 0, color: ColorCustom.anthensGray),
+                                   border: index == 4 ? null : const Border(
+                                     bottom:   BorderSide(width: 0, color: ColorCustom.anthensGray),
                                    )
                                ),
                                child: Row(
                                  children: [
                                    Expanded(
                                      flex: 1,
-                                     child: Container(
-                                       decoration: const BoxDecoration(
-                                         shape: BoxShape.circle,
-                                       ),
-                                       width: 50,
-                                       height:50,
-                                       child: Container(
-                                         width: 50,
-                                         height: 50,
-                                         decoration: BoxDecoration(
-                                           shape: BoxShape.circle,
-                                           color: ColorCustom.doveGrayColor.withOpacity(0.4),
-                                           border: Border.all(
-                                             color: Colors.grey.withOpacity(0.1),
-                                             width: 0,
-                                           ),
-                                         ),
-                                         child: Center(
-                                           child:
-                                           Image.asset(IconCustom.iconMale),
-                                         ),
-                                       ),
+                                     child: Image(
+                                       image: AssetImage(musics.where((item) => item.id == randomVoice).toList()[index].imageUrl ?? ""),
                                      ),
                                    ),
+                                   const SizedBox(width: 15),
                                    Expanded(
                                        flex: 2,
                                        child: Column(
                                          crossAxisAlignment: CrossAxisAlignment.start,
                                          children: [
                                            Container(
-                                             height: width * 0.07,
                                              padding: const EdgeInsets.symmetric(
                                                  horizontal: 15, vertical: 3),
                                              decoration: BoxDecoration(
@@ -393,29 +443,29 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                                                    Radius.circular(
                                                        20)),
                                              ),
-                                             child:  Text('Dễ', style: TextStyle(fontSize: FontSizes.s16, fontWeight: FontWeight.w300, color: ColorCustom.colorWhite),),
+                                             child:  Text('${musics.where((item) => item.id == randomVoice).toList()[index].level}', style: TextStyle(fontSize: FontSizes.s12, fontWeight: FontWeight.w600, color: ColorCustom.colorWhite),),
                                            ),
-                                           SizedBox(height: 3,),
+                                           const SizedBox(height: 7,),
                                            Row(
-                                             children: [
-                                               Expanded(child: Text("Bầu trời mới", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s18, fontWeight: FontWeight.w500),))
+                                             children:  [
+                                                 Expanded(child: Text("${musics.where((item) => item.id == randomVoice).toList()[index].name}", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s16, fontWeight: FontWeight.w600),))
                                              ],
                                            ),
-                                           SizedBox(height: 5),
+                                           const SizedBox(height: 7),
                                            Row(
-                                             children: const [
+                                             children:  [
                                                Expanded(
                                                  flex: 5,
-                                                 child: Text("Nghệ sĩ.", style: TextStyle(fontSize: FontSizes.s13,
-                                                     fontWeight: FontWeight.w300
-                                                     , color: ColorCustom.colorWhite),),
+                                                 child: Text("${musics.where((item) => item.id == randomVoice).toList()[index].artist}", style: TextStyle(fontSize: FontSizes.s14,
+                                                     fontWeight: FontWeight.w400
+                                                     , color: ColorCustom.colorTextHeader),),
                                                )
                                              ],
                                            ),
                                          ],)),
                                    Expanded(child: Row(
                                      mainAxisAlignment: MainAxisAlignment.end,
-                                     children: [
+                                     children: const [
                                        Icon(Icons.more_vert, color: ColorCustom.colorWhite,)
                                      ],
                                    ))
@@ -429,13 +479,18 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                    ),
 
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.only(
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          top: BorderSide(color: Colors.grey, width: 0.5, style: BorderStyle.solid),
+                          right: BorderSide(color: Colors.grey, width: 0.5, style: BorderStyle.solid),
+                          bottom: BorderSide(color: Colors.grey, width: 0.5, style: BorderStyle.solid),
+                          left: BorderSide(color: Colors.grey, width: 0.5, style: BorderStyle.solid),
+                        ),
+                        borderRadius:  BorderRadius.only(
                            topRight: Radius.circular(RadiusCustom.radiusCardItem),
                            topLeft: Radius.circular(RadiusCustom.radiusCardItem),),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                       child: Column(
                         children: [
                           Row(
@@ -444,7 +499,7 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                               Expanded(
                                 child: GestureDetector(
                                   onTap: () {
-                                    // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const IdentityVoiceDetailScreen()));
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePageScreen()));
                                   },
                                   child: Container(
                                     height: width * 0.15,
@@ -453,16 +508,7 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                                     decoration: BoxDecoration(
                                         border: Border.all(color: Colors.grey),
                                         borderRadius: const BorderRadius.all(
-                                            Radius.circular(
-                                                RadiusCustom.radiusCardItem)),
-                                        // gradient: const LinearGradient(
-                                        //   begin: Alignment.topLeft,
-                                        //   end: Alignment.bottomCenter,
-                                        //   colors: [
-                                        //     Color(0xFF7624F9),
-                                        //     Color(0xFF9A63F1),
-                                        //   ],
-                                        // ),
+                                            Radius.circular(RadiusCustom.radiusCardItem)),
                                         image: const DecorationImage(
                                             image: AssetImage(ImagesCustom.imageVoiceIdentityBackground),
                                             fit: BoxFit.cover
@@ -476,14 +522,14 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                               )
                             ],
                           ),
-                          SizedBox(height: 5),
+                         const SizedBox(height: 5),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
                                 child: GestureDetector(
                                   onTap: () {
-                                    // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const IdentityVoiceDetailScreen()));
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePageScreen()));
                                   },
                                   child: Container(
                                     height: width * 0.15,
@@ -524,4 +570,38 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
       ),
     );
   }
+}
+
+class Person{
+  String? imageUrl;
+  String? name;
+  String? title;
+  int? id;
+  Person(
+      this.name,
+      this.imageUrl,
+      this.title,
+      this.id);
+}
+
+class Music{
+  String? imageUrl;
+  String? name;
+  String? artist;
+  String? level;
+  int? id;
+  Music(
+      this.imageUrl,
+      this.name,
+      this.artist,
+      this.level,
+      this.id);
+}
+
+class Voice{
+  String? name;
+  String? description;
+  int? id; 
+
+  Voice(this.name, this.description, this.id);
 }

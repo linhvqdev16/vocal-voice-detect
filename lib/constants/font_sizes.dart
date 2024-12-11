@@ -28,4 +28,8 @@ class FontSizes{
 
   static const double s26 = 26;
 
+  static const double s40 = 40;
+
+  static const double s36 = 36;
+
 }

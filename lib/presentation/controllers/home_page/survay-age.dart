@@ -56,9 +56,11 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
         height: height,
         child: Stack(
           children: [
-             const Align(
+            Align(
               alignment: Alignment.bottomCenter,
-              child: Image(image: AssetImage(ImagesCustom.imageLightGrow),),
+              child: SizedBox(
+                  width: width,
+                  child: const Image(image: AssetImage(ImagesCustom.imageLightGrow), fit: BoxFit.cover,)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -73,25 +75,22 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
                       children: [
                         Expanded(
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                Align(
-                                  alignment: Alignment.centerLeft,
+                                Expanded(
                                   child:  Text("Năm nay bạn bao nhiêu tuổi ?",
                                       style:  TextStyle(
-                                          fontSize: FontSizes.s25,
-                                          fontWeight: FontWeight.w500,
-                                          color: ColorCustom.colorWhite
+                                        fontSize: FontSizes.s36,
+                                        fontWeight: FontWeight.w500,
+                                        color: ColorCustom.colorWhite,
                                       )),
                                 ),
-                                SizedBox(height: 15),
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text("Tuổi tác có thể ảnh hưởng đến quãng dọng",
                                       style: TextStyle(
-                                          fontSize: FontSizes.s12,
-                                          fontWeight: FontWeight.normal,
-                                          color: ColorCustom.colorWhite
+                                          fontSize: FontSizes.s14,
+                                          fontWeight: FontWeight.w400,
+                                          color: ColorCustom.colorTextHeader
                                       )),
                                 ),
                               ],
@@ -135,7 +134,7 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(
                                             RadiusCustom.radiusImagePortrait)),
-                                     image: ageSelected == index ?  DecorationImage(
+                                     image: ageSelected == index ?  const DecorationImage(
                                        image: AssetImage(ImagesCustom.imageBackgroundAge),
                                        fit: BoxFit.fill
                                      ) : null
@@ -143,7 +142,7 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("${index}", style:  ageSelected == index ?  TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite)
+                                    Text("${index}", style:  ageSelected == index ?  const TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite)
                                        :  TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite.withOpacity(0.5)),)
                                   ],
                                 ),
@@ -233,43 +232,6 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
                                   fit: BoxFit.fill
                               )
                           ),
-                          // child: Row(
-                          //   children: [
-                          //     Expanded(
-                          //         flex: 3,
-                          //         child: Row(
-                          //           mainAxisAlignment: MainAxisAlignment.center,
-                          //           children: const [
-                          //             Text("Tiếp tục", style: TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite),)
-                          //           ],
-                          //         )),
-                          //     Expanded(
-                          //         flex: 1,
-                          //         child: Container(
-                          //           decoration: const BoxDecoration(
-                          //             shape: BoxShape.circle,
-                          //           ),
-                          //           width: 50,
-                          //           height: 50,
-                          //           child: Container(
-                          //             width: 50,
-                          //             height: 50,
-                          //             decoration: BoxDecoration(
-                          //               shape: BoxShape.circle,
-                          //               color: Colors.black,
-                          //               border: Border.all(
-                          //                 color: Colors.grey.withOpacity(0.1),
-                          //                 width: 0,
-                          //               ),
-                          //             ),
-                          //             child: Center(
-                          //               child:
-                          //               Image.asset(IconCustom.iconArrowH, color: ColorCustom.colorWhite),
-                          //             ),
-                          //           ),
-                          //         ))
-                          //   ],
-                          // ),
                         ),
                       ),
                     )

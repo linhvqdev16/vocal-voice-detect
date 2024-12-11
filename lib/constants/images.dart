@@ -61,4 +61,8 @@ class ImagesCustom{
   static const String imageBackgroundResult =  "assets/images/components/image-backgroud-result.png";
 
   static const String imageSpeedText = "assets/images/components/image-speed-text.png";
+
+  static const String imageMusic =  "assets/images/components/image-music.png";
+
+  static const String imageArtist = "assets/images/components/image-artist.png";
 }
