@@ -72,6 +72,7 @@ dependencies:
   #Flutter Barcode Generator package is a data visualization widget used to generate and display data in a machine-readable format. It provides a perfect approach to encoding input values using supported symbology types.
   syncfusion_flutter_barcodes: ^20.3.61
   speech_to_text: ^6.1.1
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
@@ -103,7 +104,18 @@ flutter:
       - assets/icons/
       - assets/images/launch_images/
       - assets/images/components/
-
+      - assets/images/components/alto/Singer/
+      - assets/images/components/alto/Song/
+      - assets/images/components/baritone/Singer/
+      - assets/images/components/baritone/Song/
+      - assets/images/components/bass/Singer/
+      - assets/images/components/bass/Song/
+      - assets/images/components/mezzo/Singer/
+      - assets/images/components/mezzo/Song/
+      - assets/images/components/soprano/Singer/
+      - assets/images/components/soprano/Song/
+      - assets/images/components/tenor/Singer/
+      - assets/images/components/tenor/Song/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

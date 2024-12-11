@@ -65,4 +65,5 @@ class ImagesCustom{
   static const String imageMusic =  "assets/images/components/image-music.png";
 
   static const String imageArtist = "assets/images/components/image-artist.png";
+  static const String imageLightGrowRevert = "assets/images/components/image-light-grow-revert.png";
 }

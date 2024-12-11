@@ -45,14 +45,7 @@ class _SurveyMusicScreen extends State<SurveyMusicScreen>{
     return HomeScreen(
       widget: Container(
         decoration: const BoxDecoration(
-            gradient:  LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF14171C),
-                Color(0xFF292449),
-              ],
-            ),
+            color: Color(0xFF14171C),
           image: DecorationImage(image: AssetImage(ImagesCustom.imageBackground), fit: BoxFit.fill)
         ),
         height: height,
@@ -673,16 +666,6 @@ class _SurveyMusicScreen extends State<SurveyMusicScreen>{
                             child: Row(
                               children: [
                                 Expanded(
-                                  flex: 5,
-                                  child: Container(
-                                    width: height * 0.2,
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                                      color: ColorCustom.colorWhite,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
                                   flex: 1,
                                   child: Container(
                                     width: height * 0.2,
@@ -700,6 +683,17 @@ class _SurveyMusicScreen extends State<SurveyMusicScreen>{
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: ColorCustom.doveGrayColor,
+                                    ),
+                                  ),
+                                ),
+
+                                Expanded(
+                                  flex: 5,
+                                  child: Container(
+                                    width: height * 0.2,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                                      color: ColorCustom.colorWhite,
                                     ),
                                   ),
                                 )
@@ -716,64 +710,14 @@ class _SurveyMusicScreen extends State<SurveyMusicScreen>{
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const VoiceIdentityScreen()));
                           },
                           child: Container(
-                            height: width * 0.15,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 5),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(
-                                        RadiusCustom.radiusCardItem)),
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Color(0xFF7624F9),
-                                    Color(0xFF9A63F1),
-                                  ],
-                                ),
-                                image: const DecorationImage(
+                            height: width * 0.14,
+                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                            decoration: const BoxDecoration(
+                                image:  DecorationImage(
                                     image: AssetImage(ImagesCustom.imageButtonContinue),
                                     fit: BoxFit.fill
                                 )
                             ),
-                            // child: Row(
-                            //   children: [
-                            //     Expanded(
-                            //         flex: 3,
-                            //         child: Row(
-                            //           mainAxisAlignment: MainAxisAlignment.center,
-                            //           children: const [
-                            //             Text("Tiếp tục", style: TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite),)
-                            //           ],
-                            //         )),
-                            //     Expanded(
-                            //         flex: 1,
-                            //         child: Container(
-                            //           decoration: const BoxDecoration(
-                            //             shape: BoxShape.circle,
-                            //           ),
-                            //           width: 50,
-                            //           height: 50,
-                            //           child: Container(
-                            //             width: 50,
-                            //             height: 50,
-                            //             decoration: BoxDecoration(
-                            //               shape: BoxShape.circle,
-                            //               color: Colors.black,
-                            //               border: Border.all(
-                            //                 color: Colors.grey.withOpacity(0.1),
-                            //                 width: 0,
-                            //               ),
-                            //             ),
-                            //             child: Center(
-                            //               child:
-                            //               Image.asset(IconCustom.iconArrowH, color: ColorCustom.colorWhite),
-                            //             ),
-                            //           ),
-                            //         ))
-                            //   ],
-                            // ),
                           ),
                         ),
                       )

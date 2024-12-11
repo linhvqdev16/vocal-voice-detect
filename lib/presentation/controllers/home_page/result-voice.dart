@@ -3,20 +3,19 @@ import 'dart:math';
 
 import 'package:base_flutter_app/constants/font_sizes.dart';
 import 'package:base_flutter_app/constants/images.dart';
-import 'package:base_flutter_app/presentation/controllers/home_page/home.dart';
 import 'package:base_flutter_app/presentation/controllers/home_page/home_page.dart';
-import 'package:base_flutter_app/presentation/controllers/home_page/voice-identity.dart';
+import 'package:base_flutter_app/presentation/controllers/home_page/identity-voice-detail.dart';
 import 'package:base_flutter_app/presentation/widgets/common/layout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/colors.dart';
-import '../../../constants/icons.dart';
 import '../../../constants/radius.dart';
 
 class ResultVoiceDetailScreen extends StatefulWidget{
 
-  const ResultVoiceDetailScreen({Key? key}) : super(key: key);
+  final int gender;
+  const ResultVoiceDetailScreen({Key? key, required this.gender}) : super(key: key);
 
   @override
   _ResultVoiceDetailScreen createState() => _ResultVoiceDetailScreen();
@@ -24,6 +23,7 @@ class ResultVoiceDetailScreen extends StatefulWidget{
 
 class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
 
+  late final Counter counter;
 
   bool isClickButton = false;
   int step  = 0;
@@ -36,19 +36,18 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
     initData();
   }
 
+  bool isFirstLoad = true;
 
   @override
   void didChangeDependencies(){
     super.didChangeDependencies();
   }
 
-
   late AnimationController _controller;
   late Animation<int> _animation;
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
   }
 
@@ -56,7 +55,7 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
   double width = 0;
 
   List<int> stepDone = [];
-  bool isCompletedThisStep = false;
+  bool isCompletedThisStep = true;
 
 
   List<String> listSpeedText = [
@@ -68,7 +67,6 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
 
   List<String> listSpeedTextCharacter = [];
 
-
   List<Person> persons =  [];
   List<Music> musics =  [];
   List<Voice> voices =  [];
@@ -76,137 +74,128 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
 
   Random random = Random();
 
-  void initData(){
-
-    randomVoice = random.nextInt(6) + 1;
-
+  void initData()  async {
     /// Tone 1
-    persons.add(Person("Frank Sinatra", ImagesCustom.imageArtist, "Nghệ sĩ", 1));
-    persons.add(Person("Quân A.P", ImagesCustom.imageArtist, "Nghệ sĩ", 1));
-    persons.add(Person("ERIK", ImagesCustom.imageArtist, "Nghệ sĩ", 1));
-    persons.add(Person("Hồ Quang Hiếu", ImagesCustom.imageArtist, "Nghệ sĩ", 1));
-    persons.add(Person("Alec Benjamin", ImagesCustom.imageArtist, "Nghệ sĩ", 1));
+    persons.add(Person("Frank Sinatra", "assets/images/components/baritone/Singer/image.png", "Nghệ sĩ", 1));
+    persons.add(Person("Quân A.P", "assets/images/components/baritone/Singer/image-1.png", "Nghệ sĩ", 1));
+    persons.add(Person("ERIK", "assets/images/components/baritone/Singer/image-2.png", "Nghệ sĩ", 1));
+    persons.add(Person("Hồ Quang Hiếu", "assets/images/components/baritone/Singer/image-3.png", "Nghệ sĩ", 1));
+    persons.add(Person("Alec Benjamin", "assets/images/components/baritone/Singer/image-4.png", "Nghệ sĩ", 1));
 
-    musics.add(Music(ImagesCustom.imageMusic, "Ai Là Người Thương Em", "Quân A.P", "Dễ", 1));
-    musics.add(Music(ImagesCustom.imageMusic, "Sau tất cả", "ERIK", "Dễ", 1));
-    musics.add(Music(ImagesCustom.imageMusic, "Chạm Đáy Nỗi Đau", "ERIK", "Dễ", 1));
-    musics.add(Music(ImagesCustom.imageMusic, "Perfect", "Ed Sheeran", "Trung bình", 1));
-    musics.add(Music(ImagesCustom.imageMusic, "Đập Vỡ Cây Đàn", "Duy Khánh", "Khó", 1));
+    musics.add(Music("assets/images/components/baritone/Song/image.png", "Ai Là Người Thương Em", "Quân A.P", "Dễ", 1));
+    musics.add(Music("assets/images/components/baritone/Song/image-1.png", "Sau tất cả", "ERIK", "Dễ", 1));
+    musics.add(Music("assets/images/components/baritone/Song/image-2.png", "Chạm Đáy Nỗi Đau", "ERIK", "Dễ", 1));
+    musics.add(Music("assets/images/components/baritone/Song/image-3.png", "Perfect", "Ed Sheeran", "Trung bình", 1));
+    musics.add(Music("assets/images/components/baritone/Song/image-4.png", "Đập Vỡ Cây Đàn", "Duy Khánh", "Khó", 1));
     /// Tone 2
-    persons.add(Person("Vũ", ImagesCustom.imageArtist, "Nghệ sĩ, Nhạc sĩ", 2));
-    persons.add(Person("HIEUTHUHAI", ImagesCustom.imageArtist, "Nghệ sĩ", 2));
-    persons.add(Person("Grey D", ImagesCustom.imageArtist, "Nghệ sĩ", 2));
-    persons.add(Person("Alexander Rybak", ImagesCustom.imageArtist, "Nghệ sĩ", 2));
-    persons.add(Person("James Arthur", ImagesCustom.imageArtist, "Nghệ sĩ", 2));
+    persons.add(Person("Vũ", "assets/images/components/bass/Singer/image.png", "Nghệ sĩ, Nhạc sĩ", 2));
+    persons.add(Person("HIEUTHUHAI", "assets/images/components/bass/Singer/image-1.png", "Nghệ sĩ", 2));
+    persons.add(Person("Grey D", "assets/images/components/bass/Singer/image-2.png", "Nghệ sĩ", 2));
+    persons.add(Person("Alexander Rybak", "assets/images/components/bass/Singer/image-3.png", "Nghệ sĩ", 2));
+    persons.add(Person("James Arthur", "assets/images/components/bass/Singer/image-4.png", "Nghệ sĩ", 2));
 
-    musics.add(Music(ImagesCustom.imageMusic, "Lạ Lùng", "Vũ", "Dễ", 2));
-    musics.add(Music(ImagesCustom.imageMusic, "Exis Sign", "HIEUTHUHAI", "Dễ", 2));
-    musics.add(Music(ImagesCustom.imageMusic, "Nothing Else Matters", "Metallica", "Trung bình", 2));
-    musics.add(Music(ImagesCustom.imageMusic, "Thành Phố Buồn", "Đan Nguyên", "Trung bình", 2));
-    musics.add(Music(ImagesCustom.imageMusic, "Through the Valley", "Shawn James", "Khó", 2));
+    musics.add(Music("assets/images/components/bass/Song/image.png", "Lạ Lùng", "Vũ", "Dễ", 2));
+    musics.add(Music("assets/images/components/bass/Song/image-1.png", "Exis Sign", "HIEUTHUHAI", "Dễ", 2));
+    musics.add(Music("assets/images/components/bass/Song/image-2.png", "Nothing Else Matters", "Metallica", "Trung bình", 2));
+    musics.add(Music("assets/images/components/bass/Song/image-3.png", "Thành Phố Buồn", "Đan Nguyên", "Trung bình", 2));
+    musics.add(Music("assets/images/components/bass/Song/image-4.png", "Through the Valley", "Shawn James", "Khó", 2));
 
     /// Tone 3
-    persons.add(Person("Bruno Mars", ImagesCustom.imageArtist, "Nghệ sĩ", 3));
-    persons.add(Person("Sơn Tùng M-TP", ImagesCustom.imageArtist, "Nghệ sĩ", 3));
-    persons.add(Person("Đức Phúc", ImagesCustom.imageArtist, "Nghệ sĩ", 3));
-    persons.add(Person("Noo Phước Thịnh", ImagesCustom.imageArtist, "Nghệ sĩ", 3));
-    persons.add(Person("Hà Anh Tuấn", ImagesCustom.imageArtist, "Nghệ sĩ", 3));
+    persons.add(Person("Bruno Mars", "assets/images/components/tenor/Singer/image.png", "Nghệ sĩ", 3));
+    persons.add(Person("Sơn Tùng M-TP", "assets/images/components/tenor/Singer/image-1.png", "Nghệ sĩ", 3));
+    persons.add(Person("Đức Phúc", "assets/images/components/tenor/Singer/image-2.png", "Nghệ sĩ", 3));
+    persons.add(Person("Noo Phước Thịnh", "assets/images/components/tenor/Singer/image-3.png", "Nghệ sĩ", 3));
+    persons.add(Person("Hà Anh Tuấn", "assets/images/components/tenor/Singer/image-4.png", "Nghệ sĩ", 3));
 
-    musics.add(Music(ImagesCustom.imageMusic, "Hơn Cả Yêu", "Đức Phúc", "Dễ", 3));
-    musics.add(Music(ImagesCustom.imageMusic, "Tháng Tư Là Lời Nói Dối Của Em", "Hà Anh Tuấn", "Dễ", 3));
-    musics.add(Music(ImagesCustom.imageMusic, "Cause I Love You", "Noo Phước Thịnh", "Trung bình", 3));
-    musics.add(Music(ImagesCustom.imageMusic, "When I Was Your Man", "Bruno Mars", "Trung bình", 3));
-    musics.add(Music(ImagesCustom.imageMusic, "All of Me", "John Legend", "Khó", 3));
+    musics.add(Music("assets/images/components/tenor/Song/image.png", "Hơn Cả Yêu", "Đức Phúc", "Dễ", 3));
+    musics.add(Music("assets/images/components/tenor/Song/image-1.png", "Tháng Tư Là Lời Nói Dối Của Em", "Hà Anh Tuấn", "Dễ", 3));
+    musics.add(Music("assets/images/components/tenor/Song/image-2.png", "Cause I Love You", "Noo Phước Thịnh", "Trung bình", 3));
+    musics.add(Music("assets/images/components/tenor/Song/image-3.png", "When I Was Your Man", "Bruno Mars", "Trung bình", 3));
+    musics.add(Music("assets/images/components/tenor/Song/image-4.png", "All of Me", "John Legend", "Khó", 3));
     /// Tone 4
-    persons.add(Person("Adele", ImagesCustom.imageArtist, "Nghệ sĩ", 4));
-    persons.add(Person("Ariana Grande", ImagesCustom.imageArtist, "Nghệ sĩ", 4));
-    persons.add(Person("Mỹ Linh", ImagesCustom.imageArtist, "Nghệ sĩ", 4));
-    persons.add(Person("Bảo Anh", ImagesCustom.imageArtist, "Nghệ sĩ", 4));
-    persons.add(Person("Tóc Tiên", ImagesCustom.imageArtist, "Nghệ sĩ", 4));
+    persons.add(Person("Adele", "assets/images/components/alto/Singer/image.png", "Nghệ sĩ", 4));
+    persons.add(Person("Ariana Grande", "assets/images/components/alto/Singer/image-1.png", "Nghệ sĩ", 4));
+    persons.add(Person("Mỹ Linh", "assets/images/components/alto/Singer/image-2.png", "Nghệ sĩ", 4));
+    persons.add(Person("Bảo Anh", "assets/images/components/alto/Singer/image-3.png", "Nghệ sĩ", 4));
+    persons.add(Person("Tóc Tiên", "assets/images/components/alto/Singer/image-4.png", "Nghệ sĩ", 4));
 
-    musics.add(Music(ImagesCustom.imageMusic, "Someone Like You", "Adele", "Dễ", 4));
-    musics.add(Music(ImagesCustom.imageMusic, "If I Ain't Got You", "Alicia Keys", "Dễ", 4));
-    musics.add(Music(ImagesCustom.imageMusic, "Piece of My Heart", "Janis Joplin", "Trung bình", 4));
-    musics.add(Music(ImagesCustom.imageMusic, "Tình Lỡ", "Lệ Quyên", "Trung bình", 4));
-    musics.add(Music(ImagesCustom.imageMusic, "My Heart Will Go On", "Celine Dion", "Khó", 4));
+    musics.add(Music("assets/images/components/alto/Song/image.png", "Someone Like You", "Adele", "Dễ", 4));
+    musics.add(Music("assets/images/components/alto/Song/image-1.png", "If I Ain't Got You", "Alicia Keys", "Dễ", 4));
+    musics.add(Music("assets/images/components/alto/Song/image-2.png", "Piece of My Heart", "Janis Joplin", "Trung bình", 4));
+    musics.add(Music("assets/images/components/alto/Song/image-3.png", "Tình Lỡ", "Lệ Quyên", "Trung bình", 4));
+    musics.add(Music("assets/images/components/alto/Song/image-4.png", "My Heart Will Go On", "Celine Dion", "Khó", 4));
     /// Tone 5
-    persons.add(Person("Leona Lewis", ImagesCustom.imageArtist, "Nghệ sĩ", 5));
-    persons.add(Person("Hồ Ngọc Hà", ImagesCustom.imageArtist, "Nghệ sĩ", 5));
-    persons.add(Person("Hoàng Thùy Linh", ImagesCustom.imageArtist, "Nghệ sĩ", 5));
-    persons.add(Person("Mỹ Tâm", ImagesCustom.imageArtist, "Nghệ sĩ", 5));
-    persons.add(Person("MIN", ImagesCustom.imageArtist, "Nghệ sĩ", 5));
+    persons.add(Person("Leona Lewis", "assets/images/components/mezzo/Singer/image.png", "Nghệ sĩ", 5));
+    persons.add(Person("Hồ Ngọc Hà", "assets/images/components/mezzo/Singer/image-1.png", "Nghệ sĩ", 5));
+    persons.add(Person("Hoàng Thùy Linh", "assets/images/components/mezzo/Singer/image-2.png", "Nghệ sĩ", 5));
+    persons.add(Person("Mỹ Tâm", "assets/images/components/mezzo/Singer/image-3.png", "Nghệ sĩ", 5));
+    persons.add(Person("MIN", "assets/images/components/mezzo/Singer/image-4.png", "Nghệ sĩ", 5));
 
-    musics.add(Music(ImagesCustom.imageMusic, "Em Gái Mưa", "Hương Tràm", "Dễ", 5));
-    musics.add(Music(ImagesCustom.imageMusic, "Because of You", "Kelly Clarkson", "Dễ", 5));
-    musics.add(Music(ImagesCustom.imageMusic, "Bleeding Love", "Leona Lewis", "Trung bình", 5));
-    musics.add(Music(ImagesCustom.imageMusic, "Yêu Một Người Vô Tâm", "Bảo Anh", "Trung bình", 5));
-    musics.add(Music(ImagesCustom.imageMusic, "I Will Always Love You", "Whitney Houston", "Khó", 5));
+    musics.add(Music("assets/images/components/mezzo/Song/image.png", "Em Gái Mưa", "Hương Tràm", "Dễ", 5));
+    musics.add(Music("assets/images/components/mezzo/Song/image-1.png", "Because of You", "Kelly Clarkson", "Dễ", 5));
+    musics.add(Music("assets/images/components/mezzo/Song/image-2.png", "Bleeding Love", "Leona Lewis", "Trung bình", 5));
+    musics.add(Music("assets/images/components/mezzo/Song/image-3.png", "Yêu Một Người Vô Tâm", "Bảo Anh", "Trung bình", 5));
+    musics.add(Music("assets/images/components/mezzo/Song/image-4.png", "I Will Always Love You", "Whitney Houston", "Khó", 5));
     /// Tone 6
-    persons.add(Person("Lương Bích Hữu", ImagesCustom.imageArtist, "Nghệ sĩ", 6));
-    persons.add(Person("Ái Phương", ImagesCustom.imageArtist, "Nghệ sĩ", 6));
-    persons.add(Person("Vũ Cát Tường", ImagesCustom.imageArtist, "Nghệ sĩ", 6));
-    persons.add(Person("Hương Giang", ImagesCustom.imageArtist, "Nghệ sĩ", 6));
-    persons.add(Person("Beyoncé", ImagesCustom.imageArtist, "Nghệ sĩ", 6));
+    persons.add(Person("Lương Bích Hữu", "assets/images/components/soprano/Singer/image.png", "Nghệ sĩ", 6));
+    persons.add(Person("Ái Phương", "assets/images/components/soprano/Singer/image-1.png", "Nghệ sĩ", 6));
+    persons.add(Person("Vũ Cát Tường", "assets/images/components/soprano/Singer/image-2.png", "Nghệ sĩ", 6));
+    persons.add(Person("Hương Giang", "assets/images/components/soprano/Singer/image-3.png", "Nghệ sĩ", 6));
+    persons.add(Person("Beyoncé", "assets/images/components/soprano/Singer/image-4.png", "Nghệ sĩ", 6));
 
-    musics.add(Music(ImagesCustom.imageMusic, "Halo", "Beyoncé", "Dễ", 6));
-    musics.add(Music(ImagesCustom.imageMusic, "Có Em Chờ", "MIN", "Dễ", 6));
-    musics.add(Music(ImagesCustom.imageMusic, "Bùa Yêu", "Bích Phương", "Trung bình", 6));
-    musics.add(Music(ImagesCustom.imageMusic, "Bèo Dạt Mây Trôi", "Thùy Chi", "Trung bình", 6));
-    musics.add(Music(ImagesCustom.imageMusic, "Không Thể Cùng Nhau Suốt Kiếp", "Hòa Minzy", "Khó", 6));
+    musics.add(Music("assets/images/components/soprano/Song/image.png", "Halo", "Beyoncé", "Dễ", 6));
+    musics.add(Music("assets/images/components/soprano/Song/image-1.png", "Có Em Chờ", "MIN", "Dễ", 6));
+    musics.add(Music("assets/images/components/soprano/Song/image-2.png", "Bùa Yêu", "Bích Phương", "Trung bình", 6));
+    musics.add(Music("assets/images/components/soprano/Song/image-3.png", "Bèo Dạt Mây Trôi", "Thùy Chi", "Trung bình", 6));
+    musics.add(Music("assets/images/components/soprano/Song/image-4.png", "Không Thể Cùng Nhau Suốt Kiếp", "Hòa Minzy", "Khó", 6));
 
     /// Add voice
-    voices.add(Voice("Baritone", "Âm vực của bạn là A3-D6", 1));
-    voices.add(Voice("Bass", "Âm vực của bạn là A3-D6", 2));
-    voices.add(Voice("Tenor", "Âm vực của bạn là A3-D6", 3));
-    voices.add(Voice("Alto", "Âm vực của bạn là A3-D6", 4));
-    voices.add(Voice("Mezzo", "Âm vực của bạn là A3-D6", 5));
-    voices.add(Voice("Soprano", "Âm vực của bạn là A3-D6", 6));
-  }
+    voices.add(Voice("Baritone", "Âm vực của bạn là A3-D6", 1, 1));
+    voices.add(Voice("Bass", "Âm vực của bạn là A3-D6", 2, 1));
+    voices.add(Voice("Tenor", "Âm vực của bạn là A3-D6", 3, 1));
+    voices.add(Voice("Alto", "Âm vực của bạn là A3-D6", 4, 2));
+    voices.add(Voice("Mezzo", "Âm vực của bạn là A3-D6", 5, 2));
+    voices.add(Voice("Soprano", "Âm vực của bạn là A3-D6", 6, 2));
 
+    if(widget.gender == 1){
+      randomVoice = random.nextInt(3) + 1;
+    }else{
+      randomVoice = random.nextInt(3) + 4;
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
-    // final counter = Provider.of<Counter>(context);
-    // counter.setState(listSpeedTextCharacter, _animation);
     return Scaffold(
       backgroundColor: ColorCustom.pageModelBackgroundColor,
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: const Text('Xác định âm vực'),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-              gradient:  LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFF14171C),
-                  Color(0xFF292449),
-                ],
-              )
-          ),
-        ),
-        leading: GestureDetector(
-            onTap: (){
-              Navigator.of(context).pop();
-            },
-            child: const Icon(Icons.arrow_back)),
-        actions: const [
-          // Padding(padding: EdgeInsets.only(right: 10), child: Icon(Icons.info),)
-        ],
-        centerTitle: true,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: Container(),
       ),
+      // AppBar(
+      //   // Here we take the value from the MyHomePage object that was created by
+      //   // the App.build method, and use it to set our appbar title.
+      //   title: const Text('Xác định âm vực'),
+      //   flexibleSpace: Container(
+      //     decoration: const BoxDecoration(
+      //         color: Color(0xFF14171C)
+      //     ),
+      //   ),
+      //   leading: GestureDetector(
+      //       onTap: (){
+      //         Navigator.of(context).pop();
+      //       },
+      //       child: const Icon(Icons.arrow_back)),
+      //   actions: const [
+      //     // Padding(padding: EdgeInsets.only(right: 10), child: Icon(Icons.info),)
+      //   ],
+      //   centerTitle: true,
+      // ),
       body: Container(
         decoration: const BoxDecoration(
-            gradient:  LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF14171C),
-                Color(0xFF292449),
-              ],
-            )
+            color: Color(0xFF14171C)
         ),
         height: height,
         child: Column(
@@ -217,266 +206,286 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const SizedBox(height: 20,),
-                   LayoutScreen(
-                     child: Column(
-                       children: [
-                         SizedBox(
-                           height: height * 0.32,
-                           child: Stack(
-                             children: [
-                               Container(
-                                 margin: EdgeInsets.only(top: 60),
-                                 child: Row(
-                                   children: [
-                                     Expanded(
-                                       child: GestureDetector(
-                                         onTap: () {
-                                           setState(() {
-                                           });
-                                         },
-                                         child: Container(
-                                           height: height * 0.24,
-                                           padding: const EdgeInsets.only(top: 55),
-                                           decoration: const BoxDecoration(
-                                             borderRadius:  BorderRadius.all(
-                                                 Radius.circular(
-                                                     RadiusCustom.radiusHeader)),
-                                             image: DecorationImage(
-                                               image: AssetImage(ImagesCustom.imageBackgroundResult),
-                                               fit: BoxFit.fill
-                                             )
-                                           ),
-                                           child: Column(
-                                             crossAxisAlignment: CrossAxisAlignment.center,
-                                             children: [
-                                               Row(
-                                                 children:  [
-                                                   Expanded(
-                                                       child: Padding(
-                                                           padding: EdgeInsets.only(top: 15),
-                                                           child: Text( "${voices.firstWhere((item) => item.id == randomVoice).description ?? ""}", style: TextStyle(color: ColorCustom.colorTextHeader, fontSize: FontSizes.s14, fontWeight: FontWeight.w400), textAlign: TextAlign.center,)))
-                                                 ],
-                                               ),
-                                               Row(
-                                                 children:  [
-                                                   Expanded(
-                                                       child: Padding(
-                                                           padding: EdgeInsets.only(top: 15),
-                                                           child: Text("${voices.firstWhere((item) => item.id == randomVoice).name ?? ""}", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s36, fontWeight: FontWeight.w500), textAlign: TextAlign.center)))
-                                                 ],
-                                               )
-                                             ],
-                                           ),
-                                         ),
-                                       ),
-                                     ),
-                                   ],
-                                 ),
-                               ),
-                               Positioned(
-                                 top: -0, // Align the image with the top edge of the container
-                                 left: 0, // Align the image to the left edge of the container
-                                 right: 0,
-                                 child: Stack(
-                                   alignment: Alignment.center,
-                                   children: [
-                                     Container(
-                                       decoration: const BoxDecoration(
-                                         shape: BoxShape.circle,
-                                         image: DecorationImage(image: AssetImage(ImagesCustom.imageSpeedText))
-                                       ),
-                                       width: 110,
-                                       height: 110,
-                                     ),
-                                   ],
-                                 ),
-                               ),
-                             ],
-                           ),
-                         ),
-                         const SizedBox(height: 15),
 
-                         Row(
-                           children: const [
-                             Expanded(child: Text("Nghệ sĩ tương tự", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s16, fontWeight: FontWeight.w600),))
-                           ],
-                         ),
-                         const SizedBox(height: 5),
-                         Row(
-                           children: const [
-                             Expanded(
-                               flex: 5,
-                               child: Text("Các nghệ sĩ có âm vực giọng hát tương tự giống bạn.", style: TextStyle(fontSize: FontSizes.s14,
-                                   fontWeight: FontWeight.w400
-                                   , color: ColorCustom.colorTextHeader, height: 1.5),),
-                             )
-                           ],
-                         ),
-                         const SizedBox(height: 15),
-                         ListView.builder(
-                           shrinkWrap: true,
-                           physics:  NeverScrollableScrollPhysics(),
-                           itemCount: persons.where((item) => item.id == randomVoice).length,  // Number of items in the list
-                           itemBuilder: (context, index) {
-                             return Container(
-                               padding: EdgeInsets.symmetric(vertical: 10),
-                               decoration: BoxDecoration(
-                                   border: index == 4 ? null :  Border(
-                                     bottom: BorderSide(width: 0, color: ColorCustom.anthensGray),
-                                   )
-                               ),
-                               child: Row(
-                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                 children: [
-                                   Expanded(
-                                     flex: 1,
-                                     child: SizedBox(
-                                       width: 40,
-                                       child: Image(
-                                         image: AssetImage(persons.where((item) => item.id == randomVoice).toList()[index].imageUrl ?? ""),
-                                       ),
-                                     ),
-                                   ),
-                                   const SizedBox(width: 5),
-                                   Expanded(
-                                       flex: 2,
-                                       child: Column(children: [
-                                         Row(
-                                           children: [
-                                             Expanded(child: Text("${persons.where((item) => item.id == randomVoice).toList()[index].name}", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s16, fontWeight: FontWeight.w600),))
-                                           ],
-                                         ),
-                                         SizedBox(height: 5),
-                                         Row(
-                                           children:  [
-                                             Expanded(
-                                               flex: 5,
-                                               child: Text("${persons.where((item) => item.id == randomVoice).toList()[index].title}", style: TextStyle(fontSize: FontSizes.s14,
-                                                   fontWeight: FontWeight.w400
-                                                   , color: ColorCustom.colorTextHeader),),
-                                             )
-                                           ],
-                                         ),
-                                       ],)),
-                                   Expanded(child: Container(
-                                     height: width * 0.1,
-                                     padding: const EdgeInsets.symmetric(
-                                         horizontal: 5, vertical: 5),
-                                     decoration: BoxDecoration(
-                                       border: Border.all(color: Colors.grey),
-                                       borderRadius: const BorderRadius.all(
-                                           Radius.circular(
-                                               RadiusCustom.radiusCardItem)),
-                                     ),
-                                     child: Row(
-                                       children: [
-                                         Expanded(
-                                             flex: 3,
-                                             child: Row(
-                                               mainAxisAlignment: MainAxisAlignment.center,
-                                               children:  [
-                                                 Text('Theo dõi', style: TextStyle(fontSize: FontSizes.s12, fontWeight: FontWeight.w500, color: ColorCustom.colorWhite),)
-                                               ],
-                                             )),
-                                       ],
-                                     ),
-                                   ),)
-                                 ],
-                               ),
-                             );
-                           },
-                         ),
+                    SizedBox(
+                      height: height * 0.44,
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: SizedBox(
+                                width: width,
+                                child: const Image(image: AssetImage(ImagesCustom.imageLightGrowRevert), fit: BoxFit.cover,)),
+                          ),
 
-                         const SizedBox(height: 15),
+                          Container(
+                            margin: const EdgeInsets.only(left: 15, right: 15, top: 20),
+                            child: Row(
+                              children:  [
+                                   GestureDetector(
+                                       onTap: (){
+                                         Navigator.of(context).pop();
+                                       },
+                                       child: const Icon(Icons.arrow_back_ios, color: ColorCustom.colorWhite, size: 20,)),
+                                   SizedBox(width: MediaQuery.of(context).size.width * 0.24,),
+                                   Expanded(child: Text('Xác định âm vực', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: ColorCustom.colorWhite),))
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 125, left: 15, right: 15),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                      });
+                                    },
+                                    child: Container(
+                                      height: height * 0.24,
+                                      padding: const EdgeInsets.only(top: 55),
+                                      decoration: const BoxDecoration(
+                                          borderRadius:  BorderRadius.all(
+                                              Radius.circular(
+                                                  RadiusCustom.radiusHeader)),
+                                          image: DecorationImage(
+                                              image: AssetImage(ImagesCustom.imageBackgroundResult),
+                                              fit: BoxFit.fill
+                                          )
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            children:  [
+                                              Expanded(
+                                                  child: Padding(
+                                                      padding: EdgeInsets.only(top: 15),
+                                                      child: Text( "${voices.firstWhere((item) => item.id == randomVoice).description ?? ""}", style: TextStyle(color: ColorCustom.colorTextHeader, fontSize: FontSizes.s14, fontWeight: FontWeight.w400), textAlign: TextAlign.center,)))
+                                            ],
+                                          ),
+                                          Row(
+                                            children:  [
+                                              Expanded(
+                                                  child: Padding(
+                                                      padding: EdgeInsets.only(top: 15),
+                                                      child: Text("${voices.firstWhere((item) => item.id == randomVoice).name ?? ""}", style: TextStyle(color: ColorCustom.colorWhite, fontSize: 48, fontWeight: FontWeight.w500), textAlign: TextAlign.center)))
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            top: 70, // Align the image with the top edge of the container
+                            left: 0, // Align the image to the left edge of the container
+                            right: 0,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(image: AssetImage(ImagesCustom.imageSpeedText))
+                                  ),
+                                  width: 110,
+                                  height: 110,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
 
-                         Row(
-                           children: const [
-                             Expanded(child: Text("Bạn có thể hát thử", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s16, fontWeight: FontWeight.w600),))
-                           ],
-                         ),
-                         const SizedBox(height: 5),
-                         Row(
-                           children: const [
-                             Expanded(
-                               flex: 5,
-                               child: Text("Các bài hát được để xuất phù hợp với quãng giọng và sở thích âm nhạc của bạn.", style: TextStyle(fontSize: FontSizes.s14,
-                                   fontWeight: FontWeight.w400
-                                   , color: ColorCustom.colorTextHeader, height: 1.5),),
-                             )
-                           ],
-                         ),
+                    LayoutScreen(
+                      child: Column(
+                        children: [
 
-                         const SizedBox(height: 15),
-                         ListView.builder(
-                           shrinkWrap: true,
-                           physics:  const NeverScrollableScrollPhysics(),
-                           itemCount: musics.where((item) => item.id == randomVoice).toList().length,  // Number of items in the list
-                           itemBuilder: (context, index) {
-                             return Container(
-                               padding: const EdgeInsets.symmetric(vertical: 10),
-                               decoration: BoxDecoration(
-                                   border: index == 4 ? null : const Border(
-                                     bottom:   BorderSide(width: 0, color: ColorCustom.anthensGray),
-                                   )
-                               ),
-                               child: Row(
-                                 children: [
-                                   Expanded(
-                                     flex: 1,
-                                     child: Image(
-                                       image: AssetImage(musics.where((item) => item.id == randomVoice).toList()[index].imageUrl ?? ""),
-                                     ),
-                                   ),
-                                   const SizedBox(width: 15),
-                                   Expanded(
-                                       flex: 2,
-                                       child: Column(
-                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                         children: [
-                                           Container(
-                                             padding: const EdgeInsets.symmetric(
-                                                 horizontal: 15, vertical: 3),
-                                             decoration: BoxDecoration(
-                                               border: Border.all(color: Colors.grey),
-                                               borderRadius: const BorderRadius.all(
-                                                   Radius.circular(
-                                                       20)),
-                                             ),
-                                             child:  Text('${musics.where((item) => item.id == randomVoice).toList()[index].level}', style: TextStyle(fontSize: FontSizes.s12, fontWeight: FontWeight.w600, color: ColorCustom.colorWhite),),
-                                           ),
-                                           const SizedBox(height: 7,),
-                                           Row(
-                                             children:  [
-                                                 Expanded(child: Text("${musics.where((item) => item.id == randomVoice).toList()[index].name}", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s16, fontWeight: FontWeight.w600),))
-                                             ],
-                                           ),
-                                           const SizedBox(height: 7),
-                                           Row(
-                                             children:  [
-                                               Expanded(
-                                                 flex: 5,
-                                                 child: Text("${musics.where((item) => item.id == randomVoice).toList()[index].artist}", style: TextStyle(fontSize: FontSizes.s14,
-                                                     fontWeight: FontWeight.w400
-                                                     , color: ColorCustom.colorTextHeader),),
-                                               )
-                                             ],
-                                           ),
-                                         ],)),
-                                   Expanded(child: Row(
-                                     mainAxisAlignment: MainAxisAlignment.end,
-                                     children: const [
-                                       Icon(Icons.more_vert, color: ColorCustom.colorWhite,)
-                                     ],
-                                   ))
-                                 ],
-                               ),
-                             );
-                           },
-                         ),
-                       ],
-                     ),
-                   ),
+                          const SizedBox(height: 15),
+
+                          Row(
+                            children: const [
+                              Expanded(child: Text("Nghệ sĩ tương tự", style: TextStyle(color: ColorCustom.colorWhite, fontSize: 20, fontWeight: FontWeight.w600),))
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: const [
+                              Expanded(
+                                flex: 5,
+                                child: Text("Các nghệ sĩ có âm vực giọng hát tương tự giống bạn.", style: TextStyle(fontSize: FontSizes.s14,
+                                    fontWeight: FontWeight.w400
+                                    , color: ColorCustom.colorTextHeader, height: 1.5),),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics:  NeverScrollableScrollPhysics(),
+                            itemCount: persons.where((item) => item.id == randomVoice).length,  // Number of items in the list
+                            itemBuilder: (context, index) {
+                              return Container(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                decoration: BoxDecoration(
+                                    border: index == 4 ? null : const  Border(
+                                      bottom: BorderSide(width: 1, color: Color(0xFF242B35)),
+                                    )
+                                ),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 64,
+                                      child: Image(
+                                        image: AssetImage(persons.where((item) => item.id == randomVoice).toList()[index].imageUrl ?? ""),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 15),
+                                    Expanded(
+                                        flex: 2,
+                                        child: Column(children: [
+                                          Row(
+                                            children: [
+                                              Expanded(child: Text("${persons.where((item) => item.id == randomVoice).toList()[index].name}", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s16, fontWeight: FontWeight.w600),))
+                                            ],
+                                          ),
+                                          SizedBox(height: 5),
+                                          Row(
+                                            children:  [
+                                              Expanded(
+                                                flex: 5,
+                                                child: Text("${persons.where((item) => item.id == randomVoice).toList()[index].title}", style: TextStyle(fontSize: FontSizes.s14,
+                                                    fontWeight: FontWeight.w400
+                                                    , color: ColorCustom.colorTextHeader),),
+                                              )
+                                            ],
+                                          ),
+                                        ],)),
+                                    Expanded(child: Container(
+                                      height: width * 0.08,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 2, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Color(0xFF242B35), width: 2),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(
+                                                RadiusCustom.radiusCardItem)),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 3,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children:  [
+                                                  Text('Theo dõi', style: TextStyle(fontSize: FontSizes.s12, fontWeight: FontWeight.w500, color: ColorCustom.colorWhite),)
+                                                ],
+                                              )),
+                                        ],
+                                      ),
+                                    ),)
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+
+                          const SizedBox(height: 15),
+
+                          Row(
+                            children: const [
+                              Expanded(child: Text("Bạn có thể hát thử", style: TextStyle(color: ColorCustom.colorWhite, fontSize: 20, fontWeight: FontWeight.w600),))
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: const [
+                              Expanded(
+                                flex: 5,
+                                child: Text("Các bài hát được để xuất phù hợp với quãng giọng và sở thích âm nhạc của bạn.", style: TextStyle(fontSize: FontSizes.s14,
+                                    fontWeight: FontWeight.w400
+                                    , color: ColorCustom.colorTextHeader, height: 1.5),),
+                              )
+                            ],
+                          ),
+
+                          const SizedBox(height: 15),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics:  const NeverScrollableScrollPhysics(),
+                            itemCount: musics.where((item) => item.id == randomVoice).toList().length,  // Number of items in the list
+                            itemBuilder: (context, index) {
+                              return Container(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                decoration: BoxDecoration(
+                                    border: index == 4 ? null : const Border(
+                                      bottom:   BorderSide(width: 1, color: Color(0xFF242B35)),
+                                    )
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Image(
+                                        image: AssetImage(musics.where((item) => item.id == randomVoice).toList()[index].imageUrl ?? ""),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 15),
+                                Expanded(
+                                    flex: 2,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15, vertical: 3),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Color(0xFF242B35), width: 2),
+                                            borderRadius: const BorderRadius.all(
+                                                Radius.circular(
+                                                    20)),
+                                          ),
+                                          child:  Text('${musics.where((item) => item.id == randomVoice).toList()[index].level}', style: TextStyle(fontSize: FontSizes.s12, fontWeight: FontWeight.w600, color: ColorCustom.colorWhite),),
+                                        ),
+                                        const SizedBox(height: 7,),
+                                        Row(
+                                          children:  [
+                                            Expanded(child: Text("${musics.where((item) => item.id == randomVoice).toList()[index].name}", style: TextStyle(color: ColorCustom.colorWhite, fontSize: FontSizes.s16, fontWeight: FontWeight.w600),))
+                                          ],
+                                        ),
+                                        const SizedBox(height: 7),
+                                        Row(
+                                          children:  [
+                                            Expanded(
+                                              flex: 5,
+                                              child: Text("${musics.where((item) => item.id == randomVoice).toList()[index].artist}", style: TextStyle(fontSize: FontSizes.s14,
+                                                  fontWeight: FontWeight.w400
+                                                  , color: ColorCustom.colorTextHeader),),
+                                            )
+                                          ],
+                                        ),
+                                      ],)),
+                                Expanded(child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: const [
+                                    Icon(Icons.more_vert, color: ColorCustom.colorWhite,)
+                                  ],
+                                ))
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
 
                     Container(
                       decoration: const BoxDecoration(
@@ -601,7 +610,8 @@ class Music{
 class Voice{
   String? name;
   String? description;
-  int? id; 
+  int? id;
+  int? gender;
 
-  Voice(this.name, this.description, this.id);
+  Voice(this.name, this.description, this.id, this.gender);
 }

@@ -3,9 +3,12 @@ import 'package:base_flutter_app/constants/colors.dart';
 import 'package:base_flutter_app/constants/font_sizes.dart';
 import 'package:base_flutter_app/constants/images.dart';
 import 'package:base_flutter_app/presentation/controllers/home_page/home.dart';
+import 'package:base_flutter_app/presentation/controllers/home_page/identity-voice-detail.dart';
 import 'package:base_flutter_app/presentation/controllers/home_page/survay-age.dart';
 import 'package:base_flutter_app/presentation/widgets/common/layout_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants/icons.dart';
 import '../../../constants/radius.dart';
@@ -20,28 +23,39 @@ class HomePageScreen extends StatefulWidget{
 
 class _HomePageScreen extends State<HomePageScreen>{
 
+
   @override
   void didChangeDependencies(){
     super.didChangeDependencies();
+  }
+
+  Future<void> saveValue(int value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('gender', value);
+  }
+
+  bool isFirstLoad = true;
+
+  @override
+  void initState (){
+    super.initState();
+    // counter =  Provider.of<Counter>(context);
   }
 
   int isSelected = -1;
 
   @override
   Widget build(BuildContext context) {
+    // if(isFirstLoad){
+    //   // counter =  Provider.of<Counter>(context);
+    //   isFirstLoad = false;
+    // }
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return HomeScreen(
       widget: Container(
         decoration: const BoxDecoration(
-            gradient:  LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF14171C),
-                Color(0xFF292449),
-              ],
-            )
+            color: Color(0xFF14171C)
         ),
         height: height,
         child: Stack(
@@ -99,26 +113,27 @@ class _HomePageScreen extends State<HomePageScreen>{
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
 
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("Designed by: LinhVQ",
-                                style: TextStyle(
-                                    fontSize: FontSizes.s22,
-                                    fontWeight: FontWeight.normal,
-                                    color: ColorCustom.colorWhite
-                                )),
-                          ),
+                          // const Align(
+                          //   alignment: Alignment.centerLeft,
+                          //   child: Text("Designed by: LinhVQ",
+                          //       style: TextStyle(
+                          //           fontSize: FontSizes.s22,
+                          //           fontWeight: FontWeight.normal,
+                          //           color: ColorCustom.colorWhite
+                          //       )),
+                          // ),
 
-                          SizedBox(height: 50,),
+                          // SizedBox(height: 50,),
 
                           Row(
                             children: [
                               Expanded(
                                 child: GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
                                     setState(() {
                                       isSelected = 1;
                                     });
+                                    await saveValue(isSelected);
                                   },
                                   child: Container(
                                     height: height * 0.16,
@@ -177,10 +192,11 @@ class _HomePageScreen extends State<HomePageScreen>{
                               const SizedBox(width: 15),
                               Expanded(
                                 child: GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
                                     setState(() {
                                       isSelected = 2;
                                     });
+                                    await saveValue(isSelected);
                                   },
                                   child: Container(
                                     height: height * 0.16,
@@ -297,27 +313,13 @@ class _HomePageScreen extends State<HomePageScreen>{
                         flex: 4,
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => SurveyAgeScreen()));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SurveyAgeScreen()));
                           },
                           child: Container(
-                            height: width * 0.15,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 5),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(
-                                        RadiusCustom.radiusHeader)),
-                                gradient: const LinearGradient(
-                                    colors: [
-                                      Color(0xFF7624F9),
-                                      Color(0xFF9A63F1),
-                                    ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomCenter,
-                                    transform: GradientRotation(3.14 /4)
-                                ),
-                                image: const DecorationImage(
+                            height: width * 0.14,
+                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                            decoration: const BoxDecoration(
+                                image:  DecorationImage(
                                     image: AssetImage(ImagesCustom.imageButtonContinue),
                                     fit: BoxFit.fill
                                 )

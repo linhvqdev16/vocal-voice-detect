@@ -44,14 +44,7 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
     return HomeScreen(
       widget: Container(
         decoration: const BoxDecoration(
-            gradient:  LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF14171C),
-                Color(0xFF292449),
-              ],
-            )
+            color: Color(0xFF14171C)
         ),
         height: height,
         child: Stack(
@@ -103,7 +96,7 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
                 Expanded(
                   flex: 5,
                   child: Container(
-                    margin: EdgeInsets.only(top: width * 0.15),
+                    margin: EdgeInsets.only(top: width * 0.28, bottom: width * 0.28),
                     child: ShaderMask(
                       shaderCallback: (Rect rect) {
                         return const LinearGradient(
@@ -142,8 +135,8 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("${index}", style:  ageSelected == index ?  const TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite)
-                                       :  TextStyle(fontSize: FontSizes.s18, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite.withOpacity(0.5)),)
+                                    Text("${index}", style:  ageSelected == index ?  const TextStyle(fontSize: FontSizes.s24, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite)
+                                       :  TextStyle(fontSize: FontSizes.s24, fontWeight: FontWeight.bold, color: ColorCustom.colorWhite.withOpacity(0.5)),)
                                   ],
                                 ),
                               ),
@@ -168,16 +161,6 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
                           child: Row(
                             children: [
                               Expanded(
-                                flex: 5,
-                                child: Container(
-                                  width: width * 0.3,
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                                    color: ColorCustom.colorWhite,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
                                 flex: 1,
                                 child: Container(
                                   width: width * 0.3,
@@ -188,6 +171,16 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
                                 ),
                               ),
 
+                              Expanded(
+                                flex: 5,
+                                child: Container(
+                                  width: width * 0.3,
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                                    color: ColorCustom.colorWhite,
+                                  ),
+                                ),
+                              ),
                               Expanded(
                                 flex: 1,
                                 child: Container(
@@ -211,23 +204,10 @@ class _SurveyAgeScreen extends State<SurveyAgeScreen>{
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SurveyMusicScreen()));
                         },
                         child: Container(
-                          height: width * 0.15,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 5, vertical: 5),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(
-                                      RadiusCustom.radiusHeader)),
-                              gradient: const LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Color(0xFF7624F9),
-                                  Color(0xFF9A63F1),
-                                ],
-                              ),
-                              image: const DecorationImage(
+                          height: width * 0.14,
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          decoration: const BoxDecoration(
+                              image:  DecorationImage(
                                   image: AssetImage(ImagesCustom.imageButtonContinue),
                                   fit: BoxFit.fill
                               )

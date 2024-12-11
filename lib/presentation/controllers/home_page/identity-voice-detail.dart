@@ -3,6 +3,7 @@ import 'package:base_flutter_app/constants/font_sizes.dart';
 import 'package:base_flutter_app/constants/images.dart';
 import 'package:base_flutter_app/presentation/controllers/home_page/result-voice.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/icons.dart';
@@ -95,12 +96,18 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
 
   List<String> listSpeedText = [
     'Hình bóng ai đó nhẹ nhàng vụt qua nơi đây  Quyến rũ ngây ngất loạn nhịp làm tim mê say',
-    'Đồ',
-    'Đố',
-    'Đồ Rê Mi Pha Son'
+    'Đồ ồ ồ ồ ồ ồ',
+    'Đố ố ố ố ố ố',
+    'Hây! Hây! Hây!'
   ];
 
   List<String> listSpeedTextCharacter = [];
+
+  Future<int> getValue() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('gender') ?? 0;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -116,14 +123,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
         title: const Text('Xác định âm vực'),
         flexibleSpace: Container(
             decoration: const BoxDecoration(
-                gradient:  LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFF14171C),
-                    Color(0xFF292449),
-                  ],
-                )
+                color: Color(0xFF14171C)
             ),
           ),
         leading: GestureDetector(
@@ -138,14 +138,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
       ),
       body: Container(
         decoration: const BoxDecoration(
-            gradient:  LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF14171C),
-                Color(0xFF292449),
-              ],
-            )
+            color: Color(0xFF14171C)
         ),
         height: height,
         child: Stack(
@@ -262,23 +255,20 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                           const SizedBox(width: 5),
                           Expanded(
                             child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  if(step != 3){
-                                    stepDone.add(step);
-                                    step += 1;
-                                    isCompletedThisStep = false;
-                                    isClickButton = false;
-                                    listSpeedTextCharacter = listSpeedText[step].split(" ");
-                                    lastWords = '';
-                                    // _controller.reset();
-                                    // listSpeedTextCharacter = listSpeedText[step].split('');
-                                    // _animation = IntTween(begin: -1, end: -1).animate(_controller);
-                                    // _controller.forward();
-                                  }else{
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ResultVoiceDetailScreen()));
-                                  }
-                                });
+                              onTap: () async {
+                                if(step != 3){
+                                 setState(() {
+                                   stepDone.add(step);
+                                   step += 1;
+                                   isCompletedThisStep = false;
+                                   isClickButton = false;
+                                   listSpeedTextCharacter = listSpeedText[step].split(" ");
+                                   lastWords = '';
+                                 });
+                                }else{
+                                  int gender = await getValue();
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  ResultVoiceDetailScreen(gender: gender)));
+                                }
                               },
                               child: Container(
                                 height: width * 0.15,
@@ -426,7 +416,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
       child: Column(
         children: [
           Container(
-            height: height * 0.25,
+            height: height * 0.135,
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.symmetric( horizontal: 15, vertical: 0),
             decoration: BoxDecoration(
@@ -510,7 +500,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
       child: Column(
         children: [
           Container(
-            height: height * 0.25,
+            height: height * 0.135,
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.symmetric( horizontal: 15, vertical: 0),
             decoration: BoxDecoration(
@@ -553,7 +543,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                         children: const [
                           Expanded(
                             flex: 5,
-                            child: Text("Tạo âm thanh “Đồ” với giọng thấp nhất của bạn.", style: TextStyle(fontSize: FontSizes.s13,
+                            child: Text("Tạo âm thanh “Đồ ồ ồ ồ ồ ồ” với giọng thấp nhất của bạn.", style: TextStyle(fontSize: FontSizes.s13,
                                 fontWeight: FontWeight.w300
                                 , color: ColorCustom.colorWhite),),
                           )
@@ -596,7 +586,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
       child: Column(
         children: [
           Container(
-            height: height * 0.25,
+            height: height * 0.135,
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.symmetric( horizontal: 15, vertical: 0),
             decoration: BoxDecoration(
@@ -639,7 +629,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                         children: const [
                           Expanded(
                             flex: 5,
-                            child: Text("Thử “Đố” bằng giọng cao nhất.", style: TextStyle(fontSize: FontSizes.s13,
+                            child: Text("Thử “Đố ố ố ố ố ố” bằng giọng cao nhất.", style: TextStyle(fontSize: FontSizes.s13,
                                 fontWeight: FontWeight.w300
                                 , color: ColorCustom.colorWhite),),
                           )
@@ -682,7 +672,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
       child: Column(
         children: [
           Container(
-            height: height * 0.25,
+            height: height * 0.135,
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.symmetric( horizontal: 15, vertical: 0),
             decoration: BoxDecoration(
@@ -725,7 +715,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                         children: const [
                           Expanded(
                             flex: 5,
-                            child: Text("Thử “Hey” ba lần với âm thanh to nhất có thể.", style: TextStyle(fontSize: FontSizes.s13,
+                            child: Text("Thử “Hây” ba lần với âm thanh to nhất có thể.", style: TextStyle(fontSize: FontSizes.s13,
                                 fontWeight: FontWeight.w300
                                 , color: ColorCustom.colorWhite),),
                           )
@@ -764,16 +754,11 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
 }
 
 class Counter with ChangeNotifier {
-  List<String> _character = [];
+  int _gender = 0;
+  int get gender => _gender;
 
-  late Animation<int> _animation;
-
-  List<String> get character => _character;
-  Animation<int> get animation => _animation;
-
-  void setState(List<String> val1, Animation<int> val) {
-    _character = val1;
-    _animation = val;
+  void setGender(int value) {
+     _gender = gender;
     notifyListeners();
   }
 }
