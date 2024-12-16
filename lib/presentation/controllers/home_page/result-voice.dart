@@ -7,7 +7,6 @@ import 'package:base_flutter_app/presentation/controllers/home_page/home_page.da
 import 'package:base_flutter_app/presentation/controllers/home_page/identity-voice-detail.dart';
 import 'package:base_flutter_app/presentation/widgets/common/layout_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/radius.dart';
@@ -243,7 +242,7 @@ class _ResultVoiceDetailScreen extends State<ResultVoiceDetailScreen> {
                                       });
                                     },
                                     child: Container(
-                                      height: height * 0.24,
+                                      height: height * 0.28,
                                       padding: const EdgeInsets.only(top: 55),
                                       decoration: const BoxDecoration(
                                           borderRadius:  BorderRadius.all(

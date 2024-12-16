@@ -1,8 +1,7 @@
 import 'package:base_flutter_app/presentation/controllers/home_page/home_page.dart';
 import 'package:base_flutter_app/presentation/controllers/home_page/identity-voice-detail.dart';
-import 'package:base_flutter_app/presentation/widgets/onboard_widgets/onboard_model_widget.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,10 +11,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [
-      ChangeNotifierProvider(create: (context) => Counter())
-    ],
-    child: MaterialApp(
+    return  MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -25,7 +21,7 @@ class MyApp extends StatelessWidget {
         bottom: true,
         child: HomePageScreen(),
       ),
-    ),);
+    );
   }
 }
 

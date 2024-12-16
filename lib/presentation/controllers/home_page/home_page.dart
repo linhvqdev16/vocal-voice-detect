@@ -7,7 +7,6 @@ import 'package:base_flutter_app/presentation/controllers/home_page/identity-voi
 import 'package:base_flutter_app/presentation/controllers/home_page/survay-age.dart';
 import 'package:base_flutter_app/presentation/widgets/common/layout_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants/icons.dart';

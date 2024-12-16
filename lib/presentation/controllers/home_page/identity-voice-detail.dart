@@ -96,9 +96,9 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
 
   List<String> listSpeedText = [
     'Hình bóng ai đó nhẹ nhàng vụt qua nơi đây  Quyến rũ ngây ngất loạn nhịp làm tim mê say',
-    'Đồ ồ ồ ồ ồ ồ',
-    'Đố ố ố ố ố ố',
-    'Hây! Hây! Hây!'
+    'Đồ',
+    'Đố',
+    'Si Son'
   ];
 
   List<String> listSpeedTextCharacter = [];
@@ -120,7 +120,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: const Text('Xác định âm vực'),
+        title: const Text('Xác định âm vực',  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: ColorCustom.colorWhite),),
         flexibleSpace: Container(
             decoration: const BoxDecoration(
                 color: Color(0xFF14171C)
@@ -130,7 +130,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
             onTap: (){
               Navigator.of(context).pop();
             },
-            child: const Icon(Icons.arrow_back)),
+            child: const Icon(Icons.arrow_back_ios, color: ColorCustom.colorWhite,)),
         actions: const [
           Padding(padding: EdgeInsets.only(right: 10), child: Icon(Icons.info),)
         ],
@@ -416,7 +416,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
       child: Column(
         children: [
           Container(
-            height: height * 0.135,
+            height: height * 0.2,
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.symmetric( horizontal: 15, vertical: 0),
             decoration: BoxDecoration(
@@ -500,7 +500,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
       child: Column(
         children: [
           Container(
-            height: height * 0.135,
+            height: height * 0.2,
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.symmetric( horizontal: 15, vertical: 0),
             decoration: BoxDecoration(
@@ -543,7 +543,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                         children: const [
                           Expanded(
                             flex: 5,
-                            child: Text("Tạo âm thanh “Đồ ồ ồ ồ ồ ồ” với giọng thấp nhất của bạn.", style: TextStyle(fontSize: FontSizes.s13,
+                            child: Text("Tạo âm thanh “Đồ” với giọng thấp nhất .", style: TextStyle(fontSize: FontSizes.s13,
                                 fontWeight: FontWeight.w300
                                 , color: ColorCustom.colorWhite),),
                           )
@@ -586,7 +586,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
       child: Column(
         children: [
           Container(
-            height: height * 0.135,
+            height: height * 0.2,
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.symmetric( horizontal: 15, vertical: 0),
             decoration: BoxDecoration(
@@ -629,7 +629,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                         children: const [
                           Expanded(
                             flex: 5,
-                            child: Text("Thử “Đố ố ố ố ố ố” bằng giọng cao nhất.", style: TextStyle(fontSize: FontSizes.s13,
+                            child: Text("Thử “Đố” bằng giọng cao nhất.", style: TextStyle(fontSize: FontSizes.s13,
                                 fontWeight: FontWeight.w300
                                 , color: ColorCustom.colorWhite),),
                           )
@@ -672,7 +672,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
       child: Column(
         children: [
           Container(
-            height: height * 0.135,
+            height: height * 0.2,
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.symmetric( horizontal: 15, vertical: 0),
             decoration: BoxDecoration(
@@ -715,7 +715,7 @@ class _IdentityVoiceDetailScreen extends State<IdentityVoiceDetailScreen> {
                         children: const [
                           Expanded(
                             flex: 5,
-                            child: Text("Thử “Hây” ba lần với âm thanh to nhất có thể.", style: TextStyle(fontSize: FontSizes.s13,
+                            child: Text("Thử “Si Son” với âm thanh to nhất có thể.", style: TextStyle(fontSize: FontSizes.s13,
                                 fontWeight: FontWeight.w300
                                 , color: ColorCustom.colorWhite),),
                           )
